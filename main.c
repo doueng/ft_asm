@@ -43,10 +43,14 @@ int		main(void)
 	printf("\nTesting ft_isascii\n");
 	chars_to_test(ascii, sizeof(ascii) / sizeof(int), ft_isascii);
 
-	printf("\nTesting ft_toupper\n");
-	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_toupper);
+	int printa[] = {' ', '~', ' ' - 1, '~' + 1};
+	printf("\nTesting ft_isprint\n");
+	chars_to_test(printa, sizeof(printa) / sizeof(int), ft_isprint);
 
 	printf("\nTesting ft_tolower\n");
+	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_tolower);
+
+	printf("\nTesting ft_puts\n");
 	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_tolower);
 	return (0);
 }
