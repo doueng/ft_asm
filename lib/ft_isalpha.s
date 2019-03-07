@@ -4,7 +4,7 @@
 
 	section	.text
 _ft_isalpha:
-	cmp		rdi, 96				; a
+	cmp		rdi, 97				; a
 	jl		UPPERCASE
 	cmp		rdi, 122			; z
 	jg		FALSE
