@@ -2,9 +2,9 @@
 
 	section	.text
 _ft_isprint:
-	cmp		rdi, 32				; space
+	cmp		rdi, ' '
 	jl		FALSE
-	cmp		rdi, 126			; tilde
+	cmp		rdi, '~'
 	jg		FALSE
 	mov		rax, 1
 	ret

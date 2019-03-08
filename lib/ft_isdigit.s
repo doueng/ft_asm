@@ -2,9 +2,9 @@
 
 	section	.text
 _ft_isdigit:
-	cmp		rdi, 48			; '0'
+	cmp		rdi, '0'
 	jl		FALSE
-	cmp		rdi, 57			; '9'
+	cmp		rdi, '9'
 	jg		FALSE
 	mov		rax, 1
 	ret

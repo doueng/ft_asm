@@ -1,15 +1,16 @@
 #include <stdio.h>
 
-extern void ft_bzero(void*, size_t);
-extern char *strcat(char *restrict s1, const char *restrict s2);
-extern int ft_isalpha(int);
-extern int ft_isdigit(int);
-extern int ft_isalnum(int);
-extern int ft_isascii(int);
-extern int ft_isprint(int);
-extern int ft_toupper(int);
-extern int ft_tolower(int);
-extern int puts(const char *s);
+void	ft_bzero(void*, size_t);
+char	*ft_strcat(char *restrict s1, const char *restrict s2);
+int		ft_isalpha(int);
+int		ft_isdigit(int);
+int		ft_isalnum(int);
+int		ft_isascii(int);
+int		ft_isprint(int);
+int		ft_toupper(int);
+int		ft_tolower(int);
+int		ft_puts(const char *s);
+size_t	ft_strlen(const char *s);
 
 typedef int (*char_func) (int);
 
@@ -51,6 +52,12 @@ int		main(void)
 	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_tolower);
 
 	printf("\nTesting ft_puts\n");
-	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_tolower);
+	ft_puts("abc");
+	ft_puts("");
+	ft_puts(NULL);
+
+	printf("\nTesting ft_strlen\n");
+	printf("%zu\n", ft_strlen("abc"));
+	ft_strlen(NULL);
 	return (0);
 }

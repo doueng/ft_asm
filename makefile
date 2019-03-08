@@ -1,7 +1,7 @@
 NAME = asm_tester
 LIBDIR = lib
 LIB = $(LIBDIR)/libfts.a
-FLAGS = -Werror -Wextra -Wall
+FLAGS = -g -O0
 SRC = main.c
 
 SRCO = $(SRC:.c=.o)
@@ -10,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(SRCO)
 	@make -C $(LIBDIR)
-	gcc $(SRCO) $(LIB) -o $(NAME)
+	gcc $(FLAGS) $(SRCO) $(LIB) -o $(NAME)
 
 %.o: %.c
 	@gcc -c $(FLAGS) $< -o $@

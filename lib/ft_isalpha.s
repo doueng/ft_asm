@@ -4,17 +4,17 @@
 
 	section	.text
 _ft_isalpha:
-	cmp		rdi, 97				; a
+	cmp		rdi, 'a'
 	jl		UPPERCASE
-	cmp		rdi, 122			; z
+	cmp		rdi, 'z'
 	jg		FALSE
 	mov		rax, 1
 	ret
 
 UPPERCASE:
-	cmp		rdi, 65				; A
+	cmp		rdi, 'A'
 	jl		FALSE
-	cmp		rdi, 90 			; Z
+	cmp		rdi, 'Z'
 	jg		FALSE
 	mov		rax, 1
 	ret
