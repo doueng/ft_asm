@@ -17,6 +17,9 @@ void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 char	*ft_strdup(const char *s1);
 
+char	*ft_strnew(size_t size);
+int		ft_putchar(int c);
+
 typedef int (*char_func) (int);
 
 void	test_charfunc(int c, char_func f)
@@ -33,6 +36,9 @@ void	chars_to_test(int *chars, size_t num_chars, char_func f)
 
 int		main(void)
 {
+	puts("TESTING PUTCHAR\n");
+	ft_putchar('c');
+	puts("\nTESTING PUTCHAR\n");
 
 	void *rofl = strdup("hello");
 	ft_bzero(rofl, ft_strlen(rofl));
@@ -83,7 +89,7 @@ int		main(void)
 	str = strdup("hello");
 	printf("%s\n", str);
 	printf("((%ld))\n", ft_strlen(str));
-	char *cpy = malloc(ft_strlen(str) + 1);
+	char *cpy = ft_strnew(ft_strlen(str));
 	cpy[ft_strlen(str)] = 0;
 	ft_memcpy(cpy, str, ft_strlen(str));
 	printf("%s\n", cpy);

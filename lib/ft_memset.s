@@ -11,7 +11,7 @@ LOOP:
 	dec		rdx
 	cmp		rdx, 0
 	mov		byte [rdi+rdx], sil
-	jne		LOOP
+	jnle	LOOP
 
 RET:
 	mov		rax, rdi
