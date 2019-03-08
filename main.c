@@ -17,6 +17,8 @@ void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 char	*ft_strdup(const char *s1);
 
+void	ft_cat(int fd);
+
 char	*ft_strnew(size_t size);
 int		ft_putchar(int c);
 
@@ -36,66 +38,65 @@ void	chars_to_test(int *chars, size_t num_chars, char_func f)
 
 int		main(void)
 {
-	puts("TESTING PUTCHAR\n");
-	ft_putchar('c');
-	puts("\nTESTING PUTCHAR\n");
+	ft_putchar('a');
 
-	void *rofl = strdup("hello");
-	ft_bzero(rofl, ft_strlen(rofl));
-	printf("((bzero %s))\n", rofl);
+	/* ft_cat(0); */
+	/* void *rofl = strdup("hello"); */
+	/* ft_bzero(rofl, ft_strlen(rofl)); */
+	/* printf("((bzero %s))\n", rofl); */
 
-	int alph[] = { 'a', 'z', 'A', 'a' - 1, 'z' + 1, 'A' - 1, 'Z' + 1 };
-	int nums[] = { '0', '4', '9', '0' - 1, '9' + 1 };
-	printf("Testing ft_isalpha\n");
-	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_isalpha);
+	/* int alph[] = { 'a', 'z', 'A', 'a' - 1, 'z' + 1, 'A' - 1, 'Z' + 1 }; */
+	/* int nums[] = { '0', '4', '9', '0' - 1, '9' + 1 }; */
+	/* printf("Testing ft_isalpha\n"); */
+	/* chars_to_test(alph, sizeof(alph) / sizeof(int), ft_isalpha); */
 
-	printf("\nTesting ft_isdigit\n");
-	chars_to_test(nums, sizeof(nums) / sizeof(int), ft_isdigit);
+	/* printf("\nTesting ft_isdigit\n"); */
+	/* chars_to_test(nums, sizeof(nums) / sizeof(int), ft_isdigit); */
 
-	printf("\nTesting ft_isalnum\n");
-	chars_to_test(nums, sizeof(nums) / sizeof(int), ft_isalnum);
-	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_isalnum);
+	/* printf("\nTesting ft_isalnum\n"); */
+	/* chars_to_test(nums, sizeof(nums) / sizeof(int), ft_isalnum); */
+	/* chars_to_test(alph, sizeof(alph) / sizeof(int), ft_isalnum); */
 
-	int ascii[] = { 0, 60, 127, -1, 128};
-	printf("\nTesting ft_isascii\n");
-	chars_to_test(ascii, sizeof(ascii) / sizeof(int), ft_isascii);
+	/* int ascii[] = { 0, 60, 127, -1, 128}; */
+	/* printf("\nTesting ft_isascii\n"); */
+	/* chars_to_test(ascii, sizeof(ascii) / sizeof(int), ft_isascii); */
 
-	int printa[] = {' ', '~', ' ' - 1, '~' + 1};
-	printf("\nTesting ft_isprint\n");
-	chars_to_test(printa, sizeof(printa) / sizeof(int), ft_isprint);
+	/* int printa[] = {' ', '~', ' ' - 1, '~' + 1}; */
+	/* printf("\nTesting ft_isprint\n"); */
+	/* chars_to_test(printa, sizeof(printa) / sizeof(int), ft_isprint); */
 
-	printf("\nTesting ft_tolower\n");
-	chars_to_test(alph, sizeof(alph) / sizeof(int), ft_tolower);
+	/* printf("\nTesting ft_tolower\n"); */
+	/* chars_to_test(alph, sizeof(alph) / sizeof(int), ft_tolower); */
 
-	printf("\nTesting ft_puts\n");
-	ft_puts("abc");
-	ft_puts("");
-	ft_puts(NULL);
+	/* printf("\nTesting ft_puts\n"); */
+	/* ft_puts("abc"); */
+	/* ft_puts(""); */
+	/* ft_puts(NULL); */
 
-	printf("\nTesting ft_strlen\n");
-	printf("%zu\n", ft_strlen("abc"));
-	ft_strlen(NULL);
+	/* printf("\nTesting ft_strlen\n"); */
+	/* printf("%zu\n", ft_strlen("abc")); */
+	/* ft_strlen(NULL); */
 
-	printf("\nTesting ft_memset\n");
-	char *str = strdup("hello");
-	ft_memset(str, 'c', ft_strlen(str));
-	printf("ft_memset 'c' %s\n", str);
-	str = strdup("");
-	ft_memset(str, 'c', ft_strlen(str));
-	ft_memset(NULL, 'd', 1000);
-	printf("ft_memset 'c' %s\n", str);
+	/* printf("\nTesting ft_memset\n"); */
+	/* char *str = strdup("hello"); */
+	/* ft_memset(str, 'c', ft_strlen(str)); */
+	/* printf("ft_memset 'c' %s\n", str); */
+	/* str = strdup(""); */
+	/* ft_memset(str, 'c', ft_strlen(str)); */
+	/* ft_memset(NULL, 'd', 1000); */
+	/* printf("ft_memset 'c' %s\n", str); */
 
-	printf("\nTesting ft_memcpy\n");
-	str = strdup("hello");
-	printf("%s\n", str);
-	printf("((%ld))\n", ft_strlen(str));
-	char *cpy = ft_strnew(ft_strlen(str));
-	cpy[ft_strlen(str)] = 0;
-	ft_memcpy(cpy, str, ft_strlen(str));
-	printf("%s\n", cpy);
-	ft_memcpy(NULL, str, ft_strlen(str));
-	ft_memcpy(cpy, NULL, ft_strlen(str));
-	ft_memcpy(cpy, str, 0);
+	/* printf("\nTesting ft_memcpy\n"); */
+	/* str = strdup("hello"); */
+	/* printf("%s\n", str); */
+	/* printf("((%ld))\n", ft_strlen(str)); */
+	/* char *cpy = ft_strnew(ft_strlen(str)); */
+	/* cpy[ft_strlen(str)] = 0; */
+	/* ft_memcpy(cpy, str, ft_strlen(str)); */
+	/* printf("%s\n", cpy); */
+	/* ft_memcpy(NULL, str, ft_strlen(str)); */
+	/* ft_memcpy(cpy, NULL, ft_strlen(str)); */
+	/* ft_memcpy(cpy, str, 0); */
 
 	return (0);
 }
