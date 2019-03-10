@@ -30,8 +30,8 @@ void	ft_cat(int fd);
 char	*ft_strcpy(char * dst, const char * src);
 char	*ft_strnew(size_t size);
 int		ft_putchar(int c);
-int		ft_strcmp(const char *s1, const char *s2);
 int		ft_sqrt(int nb);
+void	ft_strclr(char *s);
 
 typedef int (*char_func) (int);
 
@@ -228,9 +228,29 @@ void	test_strnew()
 
 void	test_sqrt()
 {
+	ft_puts(GREEN"Testing ft_sqrt\n"WHITE);
 	assert(ft_sqrt(4) == 2);
 	assert(ft_sqrt(3) == 0);
 	assert(ft_sqrt(-1) == 0);
+}
+
+void	test_strclr()
+{
+	ft_puts(GREEN"Testing ft_strclr\n"WHITE);
+
+	char	*mine = ft_strdup("helllo ");
+	char	*system = ft_strdup(mine);
+
+	ft_strclr(mine);
+	bzero(system, ft_strlen(system));
+	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
+
+	mine = ft_strdup("");
+	system = ft_strdup(mine);
+
+	ft_strclr(mine);
+	bzero(system, ft_strlen(system));
+	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
 }
 
 int		main(void)
@@ -251,6 +271,7 @@ int		main(void)
 	test_strnew();
 	/* test putchar */
 	test_sqrt();
+	test_strclr();
 
 	/* test_strcmp(); not working */
 
