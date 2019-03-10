@@ -79,8 +79,10 @@ void	test_strlen()
 void	test_strcat()
 {
 	ft_puts(GREEN"Testing ft_strcat\n"WHITE);
-	char	*mine = calloc(100, 1);
-	char	*system = calloc(100, 1);
+
+	size_t	size = 100;
+	char	*mine = ft_strnew(size);
+	char	*system = ft_strnew(size);
 
 	ft_strcat(mine, "hello");
 	strcat(system, "hello");
@@ -99,12 +101,16 @@ void	test_memset()
 {
 	ft_puts(GREEN"Testing ft_memset\n"WHITE);
 
-	int		size = 50;
-	char	*mine = calloc(size, 1);
-	char	*system = calloc(size, 1);
+	size_t	size = 100;
+	char	*mine = ft_strnew(size);
+	char	*system = ft_strnew(size);
 
 	ft_memset(mine, 'c', size);
 	memset(system, 'c', size);
+	assert(memcmp(mine, system, size) == 0);
+
+	ft_memset(mine, 'd', size / 2);
+	memset(system, 'd', size / 2);
 	assert(memcmp(mine, system, size) == 0);
 
 	ft_memset(mine, 'c', 0);
@@ -117,8 +123,8 @@ void	test_memcpy()
 	ft_puts(GREEN"Testing ft_memcpy\n"WHITE);
 
 	int		size = 50;
-	char	*mine = calloc(size, 1);
-	char	*system = calloc(size, 1);
+	char	*mine = ft_strnew(size);
+	char	*system = ft_strnew(size);
 	char	*to_cpy = "hello";
 	int		len = ft_strlen(to_cpy);
 
@@ -187,8 +193,8 @@ void	test_strcpy()
 	ft_puts(GREEN"Testing ft_strcpy\n"WHITE);
 
 	size_t	size = 100;
-	char	*mine = calloc(size, 1);
-	char	*system = calloc(size, 1);
+	char	*mine = ft_strnew(size);
+	char	*system = ft_strnew(size);
 
 	char	*to_cpy = "hello";
 	mine = ft_strcpy(mine, to_cpy);
@@ -209,20 +215,44 @@ void	test_strcpy()
 	assert(memcmp(mine, system, size) == 0);
 }
 
+void	test_strnew()
+{
+	ft_puts(GREEN"Testing ft_strnew\n"WHITE);
+
+	size_t	size = 100;
+	char	*mine = ft_strnew(size);
+	char	*system = calloc(size + 1, 1);
+
+	assert(memcmp(mine, system, size + 1) == 0);
+}
+
+void	test_sqrt()
+{
+	assert(ft_sqrt(4) == 2);
+	assert(ft_sqrt(3) == 0);
+	assert(ft_sqrt(-1) == 0);
+}
+
 int		main(void)
 {
-	/* test_bzero(); */
+	test_bzero();
 	test_strcat();
-	/* test_all_charfuncs(); */
+	test_all_charfuncs();
+	/* test puts */
 
-	/* test_strlen(); */
-	/* test_memset(); */
-	/* test_memcpy(); */
-	/* test_strdup(); */
+	test_strlen();
+	test_memset();
+	test_memcpy();
+	test_strdup();
 
 	/* test_cat(); */
 
-	/* test_strcpy(); */
+	test_strcpy();
+	test_strnew();
+	/* test putchar */
+	test_sqrt();
+
+	/* test_strcmp(); not working */
 
 	return (0);
 }

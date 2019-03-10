@@ -1,5 +1,3 @@
-	;; char	*ft_strdup(const char *s1)
-
 	global	_ft_strdup
 
 	extern	_ft_strlen
@@ -8,7 +6,7 @@
 
 	section	.text
 _ft_strdup:
-	push	rdx
+	sub		rsp, 8				; 16 align stack
 
 	cmp		rdi, 0
 	je		RET
@@ -19,17 +17,18 @@ _ft_strdup:
 	inc		rax
 	mov		[rel size], rax
 	mov		rdi, rax
+
 	call	_malloc
 	cmp		rax, 0
 	je		RET
-
 	mov		rdi, rax
+
 	mov		rsi, [rel src]
 	mov		rdx, [rel size]
 	call	_ft_memcpy
 
 RET:
-	pop		rdx
+	add		rsp, 8				; 16 align stack
 	mov		rax, rdi
 	ret
 

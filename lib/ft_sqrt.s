@@ -4,7 +4,7 @@
 	section	.text
 _ft_sqrt:
 	cmp		rdi, 0
-	jle		EXIT
+	jle		FAIL
 
 	mov		rax, 1
 	mov		rsi, 1
@@ -21,10 +21,11 @@ CHECK:
 	cmp		rsi, rdi
 	je		SUCCESS
 
+FAIL:
+	mov		rax, 0
+	ret
+
 SUCCESS:
 	dec		rax
 	ret
 
-EXIT:
-	mov		rax, 0
-	ret

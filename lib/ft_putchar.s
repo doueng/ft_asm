@@ -1,4 +1,3 @@
-
 	global	_ft_putchar
 
 	section	.text
@@ -11,9 +10,5 @@ _ft_putchar:
 	syscall
 	ret
 
-EXIT:
-	mov		rax, 0
-	ret
-
-	section	.data
-	buff	db ' '
+	section	.bss
+	buff	resb 8
