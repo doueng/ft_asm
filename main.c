@@ -79,12 +79,20 @@ void	test_strlen()
 void	test_strcat()
 {
 	ft_puts(GREEN"Testing ft_strcat\n"WHITE);
-	char	*mine = ft_strnew(100);
-	char	*system = ft_strnew(100);
+	char	*mine = calloc(100, 1);
+	char	*system = calloc(100, 1);
 
 	ft_strcat(mine, "hello");
-	/* strcat(system, "hello"); */
-	/* assert(strcmp(mine, system) == 0); */
+	strcat(system, "hello");
+	assert(strcmp(mine, system) == 0);
+
+	ft_strcat(mine, "hello");
+	strcat(system, "hello");
+	assert(strcmp(mine, system) == 0);
+
+	ft_strcat(mine, "");
+	strcat(system, "");
+	assert(strcmp(mine, system) == 0);
 }
 
 void	test_memset()
@@ -181,8 +189,8 @@ void	test_strcpy()
 	size_t	size = 100;
 	char	*mine = calloc(size, 1);
 	char	*system = calloc(size, 1);
-	char	*to_cpy = "hello";
 
+	char	*to_cpy = "hello";
 	mine = ft_strcpy(mine, to_cpy);
 	system = strcpy(system, to_cpy);
 	assert(strcmp(mine, system) == 0);
@@ -193,12 +201,18 @@ void	test_strcpy()
 	system = strcpy(system, to_cpy);
 	assert(strcmp(mine, system) == 0);
 	assert(memcmp(mine, system, size) == 0);
+
+	to_cpy = "roflcopter";
+	mine = ft_strcpy(mine, to_cpy);
+	system = strcpy(system, to_cpy);
+	assert(strcmp(mine, system) == 0);
+	assert(memcmp(mine, system, size) == 0);
 }
 
 int		main(void)
 {
 	/* test_bzero(); */
-	/* test_strcat(); */
+	test_strcat();
 	/* test_all_charfuncs(); */
 
 	/* test_strlen(); */
@@ -206,7 +220,7 @@ int		main(void)
 	/* test_memcpy(); */
 	/* test_strdup(); */
 
-	test_cat();
+	/* test_cat(); */
 
 	/* test_strcpy(); */
 
