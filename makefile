@@ -10,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(SRCO)
 	@make -C $(LIBDIR)
-	gcc $(FLAGS) $(SRCO) $(LIB) -o $(NAME)
+	@gcc $(FLAGS) $(SRCO) $(LIB) -o $(NAME)
 
 %.o: %.c
 	@gcc -c $(FLAGS) $< -o $@

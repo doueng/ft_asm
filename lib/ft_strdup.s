@@ -5,33 +5,34 @@
 	extern	_ft_strlen
 	extern	_malloc
 	extern	_ft_memcpy
-	extern	_ft_strnew
 
 	section	.text
 _ft_strdup:
+	push	rdx
+
 	cmp		rdi, 0
 	je		RET
 
-	push	rax
-
-	mov		rsi, rdi
+	mov		[rel src], rdi
 	call	_ft_strlen
 
 	inc		rax
-	mov		rdx, rax
+	mov		[rel size], rax
 	mov		rdi, rax
 	call	_malloc
+	cmp		rax, 0
+	je		RET
 
 	mov		rdi, rax
+	mov		rsi, [rel src]
+	mov		rdx, [rel size]
 	call	_ft_memcpy
 
-	pop		rax
-	ret
-
-;; void	*ft_memcpy
-;; (void *restrict dst, const void *restrict src, size_t n)
-;; rdi, rsi, rdx
-
 RET:
+	pop		rdx
 	mov		rax, rdi
 	ret
+
+	section .bss
+	src		resb 8
+	size	resb 8

@@ -17,7 +17,7 @@ READ:
 	mov		rax, 0x2000003
 	syscall
 
-	cmp		byte [rel buffer], byte '^C'
+	cmp		word [rel buffer], word '^C' ; use "fb" to set all flags
 	je		EXIT
 	cmp		rax, 0
 	jle		EXIT
@@ -28,11 +28,12 @@ WRITE:
 	lea		rsi, [rel buffer]
 	mov		rax, 0x2000004
 	syscall
+
 	jmp		LOOP
 
 EXIT:
 	ret
 
 	section .bss
-	buffer	resb 1
+	buffer	resb 100
 	fd		resb 4

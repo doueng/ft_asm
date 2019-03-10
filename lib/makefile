@@ -19,15 +19,15 @@ SRCO = $(SRC:.s=.o)
 all: $(NAME)
 
 $(NAME): $(SRCO)
-	ar rc $(NAME)  $(SRCO)
+	@ar rc $(NAME)  $(SRCO)
 
 %.o: %.s
-	nasm -fmacho64 $< -o $@
+	@nasm -fmacho64 $< -o $@
 
 clean:
-	/bin/rm -f $(SRCO)
+	@/bin/rm -f $(SRCO)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all

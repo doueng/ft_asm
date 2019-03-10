@@ -2,10 +2,7 @@
 
 	section	.text
 _ft_memset:
-	cmp		rdi, 0
-	je		RET
-	cmp		rdx, 0
-	je		RET
+	push	rdi
 
 LOOP:
 	dec		rdx
@@ -14,5 +11,6 @@ LOOP:
 	jnle	LOOP
 
 RET:
+	pop		rdi
 	mov		rax, rdi
 	ret

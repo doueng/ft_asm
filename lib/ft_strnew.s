@@ -1,4 +1,3 @@
-
 	global	_ft_strnew
 
 	extern	_malloc
@@ -6,13 +5,19 @@
 
 	section	.text
 _ft_strnew:
-	push	rcx
+	push	rdi
 
 	inc		rdi
-	mov		rsi, rdi
 	call	_malloc
+	mov		[rel res], rax
+
+	mov		rsi, rdi
 	mov		rdi, rax
 	call	_ft_bzero
 
-	pop		rcx
+	pop		rdi
+	mov		rax, [rel res]
 	ret
+
+	section	.bss
+	res		resb 8
