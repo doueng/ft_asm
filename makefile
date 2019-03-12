@@ -23,7 +23,7 @@ SRC = ft_bzero.s \
 		ft_strnew.s \
 		ft_tolower.s \
 		ft_toupper.s
-SRCO = $(SRC:.c=.o)
+SRCO = $(SRC:.s=.o)
 
 TEST = asm_tester
 TEST_SRC = main.c
@@ -34,21 +34,27 @@ all: $(LIB) $(TEST)
 $(LIB): $(SRCO)
 	ar rc $(LIB) $(SRCO)
 
-%.o: %.c
+%.o: %.s
 	nasm -fmacho64 $< -o $@
-
-$(TEST):
-	gcc $(FLAGS) $(TEST_SRC) $(LIB) -o $(NAME)
 
 clean:
 	/bin/rm -f $(SRCO)
 	/bin/rm -f compile_commands.json
 	/bin/rm -rf asm_tester.dSYM
-	make clean -C $(LIBDIR)
 
 fclean: clean
-	/bin/rm -f $(NAME)
-	make fclean -C $(LIBDIR)
+	/bin/rm -f $(LIB)
 
 re: fclean all
-.SILENT:clean
+
+$(TEST):
+	gcc $(FLAGS) $(TEST_SRC) $(LIB) -o $(NAME)
+
+tclean:
+	/bin/rm -f $(TEST_SRCO)
+
+tfclean:
+	/bin/rm -f $(TEST)
+
+
+#.SILENT:clean
