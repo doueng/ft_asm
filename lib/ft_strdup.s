@@ -6,8 +6,6 @@
 
 	section	.text
 _ft_strdup:
-	sub		rsp, 8				; 16 align stack
-
 	cmp		rdi, 0
 	je		RET
 
@@ -28,7 +26,6 @@ _ft_strdup:
 	call	_ft_memcpy
 
 RET:
-	add		rsp, 8				; 16 align stack
 	mov		rax, rdi
 	ret
 

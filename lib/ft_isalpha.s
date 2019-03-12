@@ -1,5 +1,3 @@
-; Note that the parameters have already been passed in rdi, rsi, and rdx.  We
-;
 	global	_ft_isalpha
 
 	section	.text

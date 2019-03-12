@@ -32,17 +32,14 @@ char	*ft_strnew(size_t size);
 int		ft_putchar(int c);
 int		ft_sqrt(int nb);
 void	ft_strclr(char *s);
+int		ft_strcmp(const char *s1, const char *s2);
 
 typedef int (*char_func) (int);
 
 void	test_charfunc(char_func mine, char_func system)
 {
 	for (int c=-5; c < 150; c++)
-	{
 		assert(mine(c) == system(c));
-		ft_putchar(c);
-	}
-	ft_putchar('\n');
 }
 
 void	test_all_charfuncs()
@@ -69,9 +66,15 @@ void	test_all_charfuncs()
 	test_charfunc(ft_tolower, tolower);
 }
 
+void	test_puts()
+{
+	assert(ft_puts(GREEN"Testing ft_puts"WHITE)
+		   == puts(GREEN"Testing ft_puts"WHITE));
+}
+
 void	test_strlen()
 {
-	ft_puts(GREEN"Testing ft_strlen\n"WHITE);
+	ft_puts(GREEN"Testing ft_strlen"WHITE);
 	char *rofl = strdup("rofl");
 
 	assert(ft_strlen(rofl) == strlen(rofl));
@@ -89,7 +92,7 @@ void	test_strlen()
 
 void	test_strcat()
 {
-	ft_puts(GREEN"Testing ft_strcat\n"WHITE);
+	ft_puts(GREEN"Testing ft_strcat"WHITE);
 
 	size_t	size = 100;
 	char	*mine = ft_strnew(size);
@@ -97,8 +100,6 @@ void	test_strcat()
 
 	ft_strcat(mine, "hello");
 	strcat(system, "hello");
-	printf("((%d))\n", strcmp(mine, system));
-	printf("((%s))\n", mine);
 	assert(memcmp(mine, system, size) == 0);
 
 	ft_strcat(mine, "hello");
@@ -112,7 +113,7 @@ void	test_strcat()
 
 void	test_memset()
 {
-	ft_puts(GREEN"Testing ft_memset\n"WHITE);
+	ft_puts(GREEN"Testing ft_memset"WHITE);
 
 	size_t	size = 100;
 	char	*mine = ft_strnew(size);
@@ -126,14 +127,14 @@ void	test_memset()
 	memset(system, 'd', size / 2);
 	assert(memcmp(mine, system, size) == 0);
 
-	ft_memset(mine, 'c', 0);
-	memset(system, 'c', 0);
+	ft_memset(mine, 'r', 0);
+	memset(system, 'r', 0);
 	assert(memcmp(mine, system, size) == 0);
 }
 
 void	test_memcpy()
 {
-	ft_puts(GREEN"Testing ft_memcpy\n"WHITE);
+	ft_puts(GREEN"Testing ft_memcpy"WHITE);
 
 	int		size = 50;
 	char	*mine = ft_strnew(size);
@@ -156,7 +157,7 @@ void	test_memcpy()
 
 void	test_strdup()
 {
-	ft_puts(GREEN"Testing ft_strdup\n"WHITE);
+	ft_puts(GREEN"Testing ft_strdup"WHITE);
 
 	char	*mine;
 	char	*system;
@@ -177,7 +178,7 @@ void	test_strdup()
 
 void	test_bzero()
 {
-	ft_puts(GREEN"Testing ft_bzero\n"WHITE);
+	ft_puts(GREEN"Testing ft_bzero"WHITE);
 
 	size_t	size = 100;
 	char	*mine = malloc(size);
@@ -196,7 +197,7 @@ void	test_bzero()
 
 void	test_strcpy()
 {
-	ft_puts(GREEN"Testing ft_strcpy\n"WHITE);
+	ft_puts(GREEN"Testing ft_strcpy"WHITE);
 
 	size_t	size = 100;
 	char	*mine = ft_strnew(size);
@@ -220,18 +221,24 @@ void	test_strcpy()
 
 void	test_strnew()
 {
-	ft_puts(GREEN"Testing ft_strnew\n"WHITE);
+	ft_puts(GREEN"Testing ft_strnew"WHITE);
 
 	size_t	size = 100;
 	char	*mine = ft_strnew(size);
 	char	*system = calloc(size + 1, 1);
 
 	assert(memcmp(mine, system, size + 1) == 0);
+
+	size = 0;
+	mine = ft_strnew(size);
+	system = calloc(size + 1, 1);
+
+	assert(memcmp(mine, system, size + 1) == 0);
 }
 
 void	test_sqrt()
 {
-	ft_puts(GREEN"Testing ft_sqrt\n"WHITE);
+	ft_puts(GREEN"Testing ft_sqrt"WHITE);
 	assert(ft_sqrt(4) == 2);
 	assert(ft_sqrt(3) == 0);
 	assert(ft_sqrt(-1) == 0);
@@ -239,7 +246,7 @@ void	test_sqrt()
 
 void	test_strclr()
 {
-	ft_puts(GREEN"Testing ft_strclr\n"WHITE);
+	ft_puts(GREEN"Testing ft_strclr"WHITE);
 
 	char	*mine = ft_strdup("hello ");
 	char	*system = ft_strdup(mine);
@@ -256,25 +263,31 @@ void	test_strclr()
 	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
 }
 
+void	test_putchar()
+{
+	ft_puts(GREEN"Testing ft_putchar"WHITE);
+
+	test_charfunc(ft_putchar, putchar);
+}
+
 int		main(void)
 {
-	/* test_bzero(); */
-	/* test_strcat(); */
-	/* test_all_charfuncs(); */
+	test_bzero();
+	test_strcat();
+	test_all_charfuncs();
+	test_puts();
 
-	/* test_strlen(); */
-	/* test_memset(); */
-	/* test_memcpy(); */
-	/* test_strdup(); */
+	test_strlen();
+	test_memset();
+	test_memcpy();
+	test_strdup();
 
 	test_strcpy();
-	/* test_strnew(); */
-	/* test_sqrt(); */
-	/* test_strclr(); */
+	test_strnew();
+	test_sqrt();
+	test_strclr();
+	test_putchar();
 
-	/* test_strcmp(); not working */
-
-	/* test putchar */
 	// test cat
 	/* int fd = open("./Makefile", O_RDONLY); */
 	/* ft_cat(fd); */

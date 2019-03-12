@@ -1,5 +1,5 @@
-
 	global	_ft_isalnum
+
 	extern	_ft_isalpha
 	extern	_ft_isdigit
 

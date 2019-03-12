@@ -1,24 +1,19 @@
-;; void	*ft_memcpy
-;; (void *restrict dst, const void *restrict src, size_t n)
-;; rdi, rsi, rdx
 	global	_ft_memcpy
 
 	section	.text
 _ft_memcpy:
-	cmp		rdi, 0
-	je		RET
-	cmp		rsi, 0
-	je		RET
-	cmp		rdx, 0
-	je		RET
+	mov		[rel start_dst], rdi
+	mov		[rel start_src], rsi
 
-LOOP:
-	dec		rdx
-	cmp		rdx, 0
-	mov		cl, byte [rsi+rdx]
-	mov		byte [rdi+rdx], cl
-	jne		LOOP
+	mov		rcx, rdx
 
-RET:
+	rep		movsb
+
+	mov		rdi, [rel start_dst]
+	mov		rsi, [rel start_src]
 	mov		rax, rdi
 	ret
+
+	section	.bss
+	start_dst	resb 8
+	start_src	resb 8

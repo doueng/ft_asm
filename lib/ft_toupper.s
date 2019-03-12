@@ -1,5 +1,5 @@
-
 	global	_ft_toupper
+
 	extern	_ft_isalpha
 
 	section	.text

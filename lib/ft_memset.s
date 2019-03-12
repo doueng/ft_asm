@@ -2,15 +2,16 @@
 
 	section	.text
 _ft_memset:
-	push	rdi
+	mov		[rel start_dst], rdi
 
-LOOP:
-	dec		rdx
-	cmp		rdx, 0
-	mov		byte [rdi+rdx], sil
-	jnle	LOOP
+	mov		rax, rsi
+	mov		rcx, rdx
+	rep		stosb
 
-RET:
-	pop		rdi
+	mov		rdi, [rel start_dst]
 	mov		rax, rdi
 	ret
+
+	section	.bss
+	start_dst	resb 8
+

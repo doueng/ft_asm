@@ -1,25 +1,17 @@
-;; Not working
-
 	global	_ft_strcmp
 
 	section	.text
 _ft_strcmp:
-	mov		rax, 0
-
-LOOP:
-	cmp		rdi, 0
-	je		RET
-	cmp		rsi, 0
-	je		RET
-
-	mov		al, byte [rdi]
-	cmp		al, byte [rsi]
-	jne		RET
-	inc		rdi
-	inc		rsi
-	jmp		LOOP
-
-RET:
-	sub		al, byte [rsi]
+	mov		[rel s1], rdi
+	mov		[rel s2], rsi
+	mov		rdx, 0xffffffff
+	repne	cmpsb
+	sub		rdi, rsi
+	mov		rax, rdi
+	mov		rdi, [rel s1]
+	mov		rsi, [rel s2]
 	ret
 
+	section	.bss
+	s1		resb 8
+	s2		resb 8
