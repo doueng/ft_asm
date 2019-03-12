@@ -7,11 +7,12 @@
 	section	.text
 _ft_strcat:
 	push	rdi
+	push	rsi
 
 	call	_ft_strlen
+	pop		rsi
 	add		rdi, rax
 	call	_ft_strcpy
 
-RET:
 	pop		rdi
 	ret

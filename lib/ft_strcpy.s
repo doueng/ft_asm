@@ -1,19 +1,24 @@
 	global	_ft_strcpy
 
+	extern	_ft_strlen
+
 	section	.text
 _ft_strcpy:
-	push	rdi
-LOOP:
-	cmp		byte [rsi], 0
-	je		RET
-	mov		cl, byte [rsi]
-	mov		byte [rdi], cl
-	inc		rdi
-	inc		rsi
-	jmp		LOOP
+	mov		[rel dst], rdi
+	mov		[rel src], rsi
 
-RET:
+	mov		rdi, rsi
+	call	_ft_strlen
+
+	mov		rcx, rax
+	mov		rdi, [rel dst]
+	rep		movsb
 	mov		byte [rdi], 0
-	pop		rdi
-	mov		rax, rdi
+
+	mov		rax, [rel dst]
+
 	ret
+
+	section	.bss
+	dst		resb 8
+	src		resb 8

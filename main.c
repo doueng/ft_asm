@@ -72,7 +72,18 @@ void	test_all_charfuncs()
 void	test_strlen()
 {
 	ft_puts(GREEN"Testing ft_strlen\n"WHITE);
+	char *rofl = strdup("rofl");
+
+	assert(ft_strlen(rofl) == strlen(rofl));
+	assert(ft_strlen(rofl) == strlen(rofl));
+	assert(ft_strlen(rofl + 2) == strlen(rofl + 2));
+	free(rofl);
+
 	assert(ft_strlen("hello") == strlen("hello"));
+	assert(ft_strlen("hell") == strlen("hell"));
+	assert(ft_strlen("hel") == strlen("hel"));
+	assert(ft_strlen("he") == strlen("he"));
+	assert(ft_strlen("h") == strlen("h"));
 	assert(ft_strlen("") == strlen(""));
 }
 
@@ -86,15 +97,17 @@ void	test_strcat()
 
 	ft_strcat(mine, "hello");
 	strcat(system, "hello");
-	assert(strcmp(mine, system) == 0);
+	printf("((%d))\n", strcmp(mine, system));
+	printf("((%s))\n", mine);
+	assert(memcmp(mine, system, size) == 0);
 
 	ft_strcat(mine, "hello");
 	strcat(system, "hello");
-	assert(strcmp(mine, system) == 0);
+	assert(memcmp(mine, system, size) == 0);
 
 	ft_strcat(mine, "");
 	strcat(system, "");
-	assert(strcmp(mine, system) == 0);
+	assert(memcmp(mine, system, size) == 0);
 }
 
 void	test_memset()
@@ -181,13 +194,6 @@ void	test_bzero()
 	assert(memcmp(mine, system, size) == 0);
 }
 
-void	test_cat()
-{
-	int fd = open("./Makefile", O_RDONLY);
-	ft_cat(fd);
-	/* ft_cat(0); */
-}
-
 void	test_strcpy()
 {
 	ft_puts(GREEN"Testing ft_strcpy\n"WHITE);
@@ -197,21 +203,18 @@ void	test_strcpy()
 	char	*system = ft_strnew(size);
 
 	char	*to_cpy = "hello";
-	mine = ft_strcpy(mine, to_cpy);
 	system = strcpy(system, to_cpy);
-	assert(strcmp(mine, system) == 0);
+	mine = ft_strcpy(mine, to_cpy);
 	assert(memcmp(mine, system, size) == 0);
 
 	to_cpy = "";
 	mine = ft_strcpy(mine, to_cpy);
 	system = strcpy(system, to_cpy);
-	assert(strcmp(mine, system) == 0);
 	assert(memcmp(mine, system, size) == 0);
 
 	to_cpy = "roflcopter";
 	mine = ft_strcpy(mine, to_cpy);
 	system = strcpy(system, to_cpy);
-	assert(strcmp(mine, system) == 0);
 	assert(memcmp(mine, system, size) == 0);
 }
 
@@ -238,7 +241,7 @@ void	test_strclr()
 {
 	ft_puts(GREEN"Testing ft_strclr\n"WHITE);
 
-	char	*mine = ft_strdup("helllo ");
+	char	*mine = ft_strdup("hello ");
 	char	*system = ft_strdup(mine);
 
 	ft_strclr(mine);
@@ -255,25 +258,28 @@ void	test_strclr()
 
 int		main(void)
 {
-	test_bzero();
-	test_strcat();
-	test_all_charfuncs();
-	/* test puts */
+	/* test_bzero(); */
+	/* test_strcat(); */
+	/* test_all_charfuncs(); */
 
-	test_strlen();
-	test_memset();
-	test_memcpy();
-	test_strdup();
-
-	/* test_cat(); */
+	/* test_strlen(); */
+	/* test_memset(); */
+	/* test_memcpy(); */
+	/* test_strdup(); */
 
 	test_strcpy();
-	test_strnew();
-	/* test putchar */
-	test_sqrt();
-	test_strclr();
+	/* test_strnew(); */
+	/* test_sqrt(); */
+	/* test_strclr(); */
 
 	/* test_strcmp(); not working */
 
+	/* test putchar */
+	// test cat
+	/* int fd = open("./Makefile", O_RDONLY); */
+	/* ft_cat(fd); */
+	/* ft_cat(0); */
+
+	/* test puts */
 	return (0);
 }

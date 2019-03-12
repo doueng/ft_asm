@@ -1,21 +1,26 @@
 	global	_ft_strlen
 
-	extern _write
-
 	section	.text
 _ft_strlen:
-	cmp		rdi, 0
-	je		NULL
+	xor		rax, rax
+	mov		[rel start], rdi
 
-	mov		rax, 0
-LOOP:
-	mov		cl, byte [rdi+rax]
-	cmp		cl, 0
-	jne		INC
-	ret
-INC:
-	inc		rax
-	jmp		LOOP
-NULL:
+	cmp		rdi, 0
+	je		RET
+
+	mov		rcx, 0xffffffff
+	xor		rax, rax
+	repne	scasb
+
+	sub		rdi, [rel start]
 	mov		rax, rdi
+	cmp		rax, 0
+	je		RET
+	dec		rax
+
+RET:
+	mov		rdi, [rel start]
 	ret
+
+	section	.bss
+	start	resb 8
