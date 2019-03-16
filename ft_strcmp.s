@@ -1,17 +1,16 @@
 	global	_ft_strcmp
 
+	%define s1_head r14
+	%define s2_head r15
+
 	section	.text
 _ft_strcmp:
-	mov		[rel s1], rdi
-	mov		[rel s2], rsi
+	mov		s1_head, rdi
+	mov		s2_head, rsi
 	mov		rdx, 0xffffffff
 	repne	cmpsb
 	sub		rdi, rsi
 	mov		rax, rdi
-	mov		rdi, [rel s1]
-	mov		rsi, [rel s2]
+	mov		rdi, s1_head
+	mov		rsi, s2_head
 	ret
-
-	section	.bss
-	s1		resb 8
-	s2		resb 8

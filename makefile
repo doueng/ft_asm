@@ -3,33 +3,32 @@ FLAGS = -Werror -Wextra -Wall
 
 LIB = libfts.a
 SRC = ft_bzero.s \
-		ft_cat.s \
+		ft_strcat.s \
 		ft_isalnum.s \
 		ft_isalpha.s \
 		ft_isascii.s \
 		ft_isdigit.s \
 		ft_isprint.s \
-		ft_memcpy.s \
+		ft_tolower.s \
+		ft_toupper.s \
+		ft_strlen.s \
 		ft_memset.s \
+		ft_memcpy.s \
+		ft_strdup.s \
+		ft_strcpy.s \
+		ft_strnew.s \
+		ft_sqrt.s \
+		ft_strclr.s \
 		ft_putchar.s \
 		ft_puts.s \
-		ft_sqrt.s \
-		ft_strcat.s \
-		ft_strclr.s \
-		ft_strcmp.s \
-		ft_strcpy.s \
-		ft_strdup.s \
-		ft_strlen.s \
-		ft_strnew.s \
-		ft_tolower.s \
-		ft_toupper.s
+		ft_cat.s
 SRCO = $(SRC:.s=.o)
 
 TEST = asm_tester
 TEST_SRC = main.c
 TEST_SRCO = main.o
 
-all: $(LIB) $(TEST)
+all: $(LIB) test
 
 $(LIB): $(SRCO)
 	ar rc $(LIB) $(SRCO)
@@ -47,7 +46,7 @@ fclean: clean
 
 re: fclean all
 
-$(TEST):
+test:
 	gcc $(FLAGS) $(TEST_SRC) $(LIB) -o $(NAME)
 
 tclean:

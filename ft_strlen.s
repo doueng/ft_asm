@@ -1,9 +1,11 @@
 	global	_ft_strlen
 
+	%define	head r15
+
 	section	.text
 _ft_strlen:
 	xor		rax, rax
-	mov		[rel start], rdi
+	mov		head, rdi
 
 	cmp		rdi, 0
 	je		RET
@@ -12,15 +14,12 @@ _ft_strlen:
 	xor		rax, rax
 	repne	scasb
 
-	sub		rdi, [rel start]
+	sub		rdi, head
 	mov		rax, rdi
 	cmp		rax, 0
 	je		RET
 	dec		rax
 
 RET:
-	mov		rdi, [rel start]
+	mov		rdi, head
 	ret
-
-	section	.bss
-	start	resb 8

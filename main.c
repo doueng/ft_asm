@@ -261,6 +261,8 @@ void	test_strclr()
 	ft_strclr(mine);
 	bzero(system, ft_strlen(system));
 	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_putchar()

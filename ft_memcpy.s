@@ -1,19 +1,18 @@
 	global	_ft_memcpy
 
+	%define src_head r15
+	%define dst_head r14
+
 	section	.text
 _ft_memcpy:
-	mov		[rel start_dst], rdi
-	mov		[rel start_src], rsi
+	mov		dst_head, rdi
+	mov		src_head, rsi
 
 	mov		rcx, rdx
 
 	rep		movsb
 
-	mov		rdi, [rel start_dst]
-	mov		rsi, [rel start_src]
+	mov		rdi, dst_head
+	mov		rsi, src_head
 	mov		rax, rdi
 	ret
-
-	section	.bss
-	start_dst	resb 8
-	start_src	resb 8

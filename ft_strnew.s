@@ -1,5 +1,8 @@
 	global	_ft_strnew
 
+	%define new_str r15
+	%define size r14
+
 	extern	_malloc
 	extern	_ft_bzero
 
@@ -8,23 +11,19 @@ _ft_strnew:
 	sub		rsp, 8				; 16 align stack
 
 	inc		rdi
-	mov		[rel size], rdi
+	mov		size, rdi
 
 	call	_malloc
 	cmp		rax, 0
 	je		RET
-	mov		[rel res], rax
+	mov		new_str, rax
 
-	mov		rsi, [rel size]
-	mov		rdi, [rel res]
+	mov		rsi, size
+	mov		rdi, new_str
 	call	_ft_bzero
 
-	mov		rax, [rel res]
+	mov		rax, new_str
 
 RET:
 	add		rsp, 8				; 16 align stack
 	ret
-
-	section	.bss
-	res		resb 8
-	size	resb 8

@@ -2,16 +2,12 @@
 
 	section	.text
 _ft_memset:
-	mov		[rel start_dst], rdi
+	mov		r15, rdi
 
 	mov		rax, rsi
 	mov		rcx, rdx
 	rep		stosb
 
-	mov		rdi, [rel start_dst]
+	mov		rdi, r15
 	mov		rax, rdi
 	ret
-
-	section	.bss
-	start_dst	resb 8
-
