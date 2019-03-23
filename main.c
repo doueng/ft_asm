@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
@@ -281,6 +282,8 @@ void	test_strnew()
 void	test_sqrt()
 {
 	ft_puts(GREEN"Testing ft_sqrt"WHITE);
+	assert(ft_sqrt(INT_MAX) == 0);
+	assert(ft_sqrt(INT_MIN) == 0);
 	assert(ft_sqrt(4) == 2);
 	assert(ft_sqrt(3) == 0);
 	assert(ft_sqrt(-1) == 0);
