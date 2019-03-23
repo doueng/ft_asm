@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <assert.h>
-#include <math.h>
 
 #define GREEN "\033[32m"
 #define WHITE "\033[0m"
@@ -92,6 +91,7 @@ void	test_puts()
 {
 	assert(ft_puts(GREEN"Testing ft_puts"WHITE)
 		   == puts(GREEN"Testing ft_puts"WHITE));
+	assert(ft_puts("") == puts(""));
 }
 
 void	test_strlen()
@@ -120,16 +120,16 @@ void	test_strcat()
 	char	*mine = XV(ft_strnew(size));
 	char	*system = XV(ft_strnew(size));
 
-	ft_strcat(mine, "hello");
-	strcat(system, "hello");
+	mine = ft_strcat(mine, "hello");
+	system = strcat(system, "hello");
 	assert(memcmp(mine, system, size) == 0);
 
-	ft_strcat(mine, "hello");
-	strcat(system, "hello");
+	mine = ft_strcat(mine, "rofl!!!");
+	system = strcat(system, "rofl!!!");
 	assert(memcmp(mine, system, size) == 0);
 
-	ft_strcat(mine, "");
-	strcat(system, "");
+	mine = ft_strcat(mine, "");
+	system = strcat(system, "");
 	assert(memcmp(mine, system, size) == 0);
 	free(mine);
 	free(system);
@@ -316,7 +316,16 @@ void	test_putchar()
 	test_charfunc(ft_putchar, putchar);
 }
 
-int		main(void)
+void	test_cat()
+{
+	int fd = open("./main.c", O_RDONLY);
+	ft_cat(fd);
+	ft_cat(-42);
+	ft_cat(0);
+	X(close(fd));
+}
+
+int		main(int argc, char *argv[])
 {
 	test_bzero();
 	test_strcat();
@@ -328,18 +337,14 @@ int		main(void)
 	test_memcpy();
 	test_strdup();
 
+	(void)argv;
+	if (argc > 1)
+		test_cat();
+
 	test_strcpy();
 	test_strnew();
 	test_sqrt();
 	test_strclr();
 	test_putchar();
-
-	// test cat
-	/* int fd = open("./Makefile", O_RDONLY); */
-	/* ft_cat(fd); */
-	/* ft_cat(0); */
-	/* ft_cat(-42); */
-
-	/* test puts */
 	return (0);
 }

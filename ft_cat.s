@@ -1,49 +1,43 @@
 
 	global	_ft_cat
 
+	extern	_read
+	extern	_write
+
 	%define	fd r15
 
 	section	.text
 _ft_cat:
-	cmp		edi, 0
-	jl		ERR
-
-	xor		rax, rax
+	sub		rsp, 120
 	mov		fd, rdi
 
 LOOP:
 
 READ:
 	mov		rdi, fd
-	mov		rdx, 1
-	lea		rsi, [rel buffer]
-	mov		rax, 0x2000003
-	syscall
+	mov		rdx, 100
+	mov		rsi, rsp
+	call	_read
 
-	;; fd
-	cmp		word [rel buffer], word '^C' ; use "fb" to set interrupt flag
-	je		EXIT
 	cmp		rax, 0
 	je		EXIT
 	jl		ERR
 
 WRITE:
+	mov		rdx, rax
+	mov		rsi, rsp
 	mov		rdi, 1
-	mov		rdx, 1
-	lea		rsi, [rel buffer]
-	mov		rax, 0x2000004
-	syscall
+	call	_write
+
 	cmp		rax, 0
 	jl		ERR
 
 	jmp		LOOP
 
 EXIT:
+	add		rsp, 120
 	ret
 
 ERR:
-	mov		rax, -1
+	add		rsp, 120
 	ret
-
-	section .bss
-	buffer	resb 100

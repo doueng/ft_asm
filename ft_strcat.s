@@ -14,4 +14,5 @@ _ft_strcat:
 	call	_ft_strcpy
 
 	pop		rdi
+	mov		rax, rdi
 	ret

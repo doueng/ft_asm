@@ -24,11 +24,11 @@ SRC = ft_bzero.s \
 		ft_cat.s
 SRCO = $(SRC:.s=.o)
 
-TEST = asm_tester
+NAME = asm_tester
 TEST_SRC = main.c
 TEST_SRCO = $(TEST_SRC:.c=.o)
 
-all: $(LIB) $(TEST)
+all: $(NAME)
 
 $(LIB): $(SRCO)
 	ar rc $(LIB) $(SRCO)
@@ -44,9 +44,9 @@ clean:
 
 fclean: clean
 	/bin/rm -f $(LIB)
-	/bin/rm -f $(TEST)
+	/bin/rm -f $(NAME)
 
-$(TEST): $(TEST_SRCO)
+$(NAME): $(TEST_SRCO) $(LIB)
 	gcc $(FLAGS) $(TEST_SRCO) $(LIB) -o $(NAME)
 
 %.o: %.c
