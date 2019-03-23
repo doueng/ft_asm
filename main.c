@@ -102,6 +102,7 @@ void	test_strlen()
 	assert(ft_strlen(rofl) == strlen(rofl));
 	assert(ft_strlen(rofl) == strlen(rofl));
 	assert(ft_strlen(rofl + 2) == strlen(rofl + 2));
+	free(rofl);
 
 	assert(ft_strlen("hello") == strlen("hello"));
 	assert(ft_strlen("hell") == strlen("hell"));
@@ -130,6 +131,8 @@ void	test_strcat()
 	ft_strcat(mine, "");
 	strcat(system, "");
 	assert(memcmp(mine, system, size) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_memset()
@@ -151,6 +154,8 @@ void	test_memset()
 	ft_memset(mine, 'r', 0);
 	memset(system, 'r', 0);
 	assert(memcmp(mine, system, size) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_memcpy()
@@ -174,6 +179,8 @@ void	test_memcpy()
 	ft_memcpy(mine, "hi", 0);
 	memcpy(system, "hi", 0);
 	assert(memcmp(mine, system, size) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_strdup()
@@ -187,14 +194,20 @@ void	test_strdup()
 	mine = XV(ft_strdup(to_cpy));
 	system = XV(strdup(to_cpy));
 	assert(strcmp(mine, system) == 0);
+	free(mine);
+	free(system);
 
 	mine = XV(ft_strdup("rofl"));
 	system = XV(strdup("rofl"));
 	assert(strcmp(mine, system) == 0);
+	free(mine);
+	free(system);
 
 	mine = XV(ft_strdup(""));
 	system = XV(strdup(""));
 	assert(strcmp(mine, system) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_bzero()
@@ -214,6 +227,8 @@ void	test_bzero()
 	ft_bzero(mine, size);
 	bzero(system, size);
 	assert(memcmp(mine, system, size) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_strcpy()
@@ -238,6 +253,8 @@ void	test_strcpy()
 	mine = ft_strcpy(mine, to_cpy);
 	system = strcpy(system, to_cpy);
 	assert(memcmp(mine, system, size) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_strnew()
@@ -249,12 +266,16 @@ void	test_strnew()
 	char	*system = XV(calloc(size + 1, 1));
 
 	assert(memcmp(mine, system, size + 1) == 0);
+	free(mine);
+	free(system);
 
 	size = 0;
 	mine = ft_strnew(size);
 	system = calloc(size + 1, 1);
 
 	assert(memcmp(mine, system, size + 1) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_sqrt()
@@ -275,6 +296,8 @@ void	test_strclr()
 	ft_strclr(mine);
 	bzero(system, ft_strlen(system));
 	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
+	free(mine);
+	free(system);
 
 	mine = XV(ft_strdup(""));
 	system = XV(ft_strdup(mine));
@@ -282,6 +305,8 @@ void	test_strclr()
 	ft_strclr(mine);
 	bzero(system, ft_strlen(system));
 	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
+	free(mine);
+	free(system);
 }
 
 void	test_putchar()
