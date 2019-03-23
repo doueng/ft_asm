@@ -34,7 +34,7 @@ $(LIB): $(SRCO)
 	ar rc $(LIB) $(SRCO)
 
 %.o: %.s
-	nasm -fmacho64 $< -o $@
+	nasm -fmacho64 $(FLAGS) $< -o $@
 
 clean:
 	/bin/rm -f $(SRCO)
