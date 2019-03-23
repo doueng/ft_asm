@@ -10,7 +10,10 @@
 #define GREEN "\033[32m"
 #define WHITE "\033[0m"
 
-void	ft_bzero(void*, size_t);
+#define X(ret) x(ret, __FILE__, __LINE__)
+#define XV(ret) xv(ret, __FILE__, __LINE__)
+
+void	ft_bzero(void *s, size_t n);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -32,7 +35,26 @@ char	*ft_strnew(size_t size);
 int		ft_putchar(int c);
 int		ft_sqrt(int nb);
 void	ft_strclr(char *s);
-int		ft_strcmp(const char *s1, const char *s2);
+
+int		x(int ret, char *file, int line)
+{
+	if (ret < 0)
+	{
+		printf("Error: file %s, line %d\n", file, line);
+		exit(EXIT_FAILURE);
+	}
+	return (ret);
+}
+
+void	*xv(void *ret, char *file, int line)
+{
+	if (ret == NULL)
+	{
+		printf("Error: file %s, line %d\n", file, line);
+		exit(EXIT_FAILURE);
+	}
+	return (ret);
+}
 
 typedef int (*char_func) (int);
 
@@ -75,12 +97,11 @@ void	test_puts()
 void	test_strlen()
 {
 	ft_puts(GREEN"Testing ft_strlen"WHITE);
-	char *rofl = strdup("rofl");
+	char *rofl = XV(ft_strdup("rofl"));
 
 	assert(ft_strlen(rofl) == strlen(rofl));
 	assert(ft_strlen(rofl) == strlen(rofl));
 	assert(ft_strlen(rofl + 2) == strlen(rofl + 2));
-	free(rofl);
 
 	assert(ft_strlen("hello") == strlen("hello"));
 	assert(ft_strlen("hell") == strlen("hell"));
@@ -95,8 +116,8 @@ void	test_strcat()
 	ft_puts(GREEN"Testing ft_strcat"WHITE);
 
 	size_t	size = 100;
-	char	*mine = ft_strnew(size);
-	char	*system = ft_strnew(size);
+	char	*mine = XV(ft_strnew(size));
+	char	*system = XV(ft_strnew(size));
 
 	ft_strcat(mine, "hello");
 	strcat(system, "hello");
@@ -116,8 +137,8 @@ void	test_memset()
 	ft_puts(GREEN"Testing ft_memset"WHITE);
 
 	size_t	size = 100;
-	char	*mine = ft_strnew(size);
-	char	*system = ft_strnew(size);
+	char	*mine = XV(ft_strnew(size));
+	char	*system = XV(ft_strnew(size));
 
 	ft_memset(mine, 'c', size);
 	memset(system, 'c', size);
@@ -137,8 +158,8 @@ void	test_memcpy()
 	ft_puts(GREEN"Testing ft_memcpy"WHITE);
 
 	int		size = 50;
-	char	*mine = ft_strnew(size);
-	char	*system = ft_strnew(size);
+	char	*mine = XV(ft_strnew(size));
+	char	*system = XV(ft_strnew(size));
 	char	*to_cpy = "hello";
 	int		len = ft_strlen(to_cpy);
 
@@ -163,16 +184,16 @@ void	test_strdup()
 	char	*system;
 	char	*to_cpy = "hello";
 
-	mine = ft_strdup(to_cpy);
-	system = strdup(to_cpy);
+	mine = XV(ft_strdup(to_cpy));
+	system = XV(strdup(to_cpy));
 	assert(strcmp(mine, system) == 0);
 
-	mine = ft_strdup("rofl");
-	system = strdup("rofl");
+	mine = XV(ft_strdup("rofl"));
+	system = XV(strdup("rofl"));
 	assert(strcmp(mine, system) == 0);
 
-	mine = ft_strdup("");
-	system = strdup("");
+	mine = XV(ft_strdup(""));
+	system = XV(strdup(""));
 	assert(strcmp(mine, system) == 0);
 }
 
@@ -181,8 +202,8 @@ void	test_bzero()
 	ft_puts(GREEN"Testing ft_bzero"WHITE);
 
 	size_t	size = 100;
-	char	*mine = malloc(size);
-	char	*system = malloc(size);
+	char	*mine = XV(malloc(size));
+	char	*system = XV(malloc(size));
 
 	mine[20] = 'a';
 	mine[0] = 'b';
@@ -200,8 +221,8 @@ void	test_strcpy()
 	ft_puts(GREEN"Testing ft_strcpy"WHITE);
 
 	size_t	size = 100;
-	char	*mine = ft_strnew(size);
-	char	*system = ft_strnew(size);
+	char	*mine = XV(ft_strnew(size));
+	char	*system = XV(ft_strnew(size));
 
 	char	*to_cpy = "hello";
 	system = strcpy(system, to_cpy);
@@ -224,8 +245,8 @@ void	test_strnew()
 	ft_puts(GREEN"Testing ft_strnew"WHITE);
 
 	size_t	size = 100;
-	char	*mine = ft_strnew(size);
-	char	*system = calloc(size + 1, 1);
+	char	*mine = XV(ft_strnew(size));
+	char	*system = XV(calloc(size + 1, 1));
 
 	assert(memcmp(mine, system, size + 1) == 0);
 
@@ -248,21 +269,19 @@ void	test_strclr()
 {
 	ft_puts(GREEN"Testing ft_strclr"WHITE);
 
-	char	*mine = ft_strdup("hello ");
-	char	*system = ft_strdup(mine);
+	char	*mine = XV(ft_strdup("rofl"));
+	char	*system = XV(ft_strdup(mine));
 
 	ft_strclr(mine);
 	bzero(system, ft_strlen(system));
 	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
 
-	mine = ft_strdup("");
-	system = ft_strdup(mine);
+	mine = XV(ft_strdup(""));
+	system = XV(ft_strdup(mine));
 
 	ft_strclr(mine);
 	bzero(system, ft_strlen(system));
 	assert(memcmp(mine, system, ft_strlen(mine)) == 0);
-	free(mine);
-	free(system);
 }
 
 void	test_putchar()
@@ -294,6 +313,7 @@ int		main(void)
 	/* int fd = open("./Makefile", O_RDONLY); */
 	/* ft_cat(fd); */
 	/* ft_cat(0); */
+	/* ft_cat(-42); */
 
 	/* test puts */
 	return (0);

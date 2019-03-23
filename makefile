@@ -26,9 +26,9 @@ SRCO = $(SRC:.s=.o)
 
 TEST = asm_tester
 TEST_SRC = main.c
-TEST_SRCO = main.o
+TEST_SRCO = $(TEST_SRC:.c=.o)
 
-all: $(LIB) test
+all: $(LIB) $(TEST)
 
 $(LIB): $(SRCO)
 	ar rc $(LIB) $(SRCO)
@@ -38,22 +38,18 @@ $(LIB): $(SRCO)
 
 clean:
 	/bin/rm -f $(SRCO)
+	/bin/rm -f $(TEST_SRCO)
 	/bin/rm -f compile_commands.json
 	/bin/rm -rf asm_tester.dSYM
 
 fclean: clean
 	/bin/rm -f $(LIB)
-
-re: fclean all
-
-test:
-	gcc $(FLAGS) $(TEST_SRC) $(LIB) -o $(NAME)
-
-tclean:
-	/bin/rm -f $(TEST_SRCO)
-
-tfclean:
 	/bin/rm -f $(TEST)
 
+$(TEST): $(TEST_SRCO)
+	gcc $(FLAGS) $(TEST_SRCO) $(LIB) -o $(NAME)
 
-#.SILENT:clean
+%.o: %.c
+	gcc -c $(FLAGS) $< -o $@
+
+re: fclean all
